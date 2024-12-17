@@ -15,21 +15,37 @@
     <a-scene>
       <a-assets>
         <audio id="click-sound" crossorigin="anonymous" src="./audio/click.ogg"></audio>
+
+        <!-- Image Assets -->
         <img id="tengah-lapangan1" crossorigin="anonymous" src="./assets/tengah_lapangan1.jpg" />
         <img id="tengah-lapangan2" crossorigin="anonymous" src="./assets/tengah_lapangan2.jpg" />
-        <img id="pintu-masuk-stadiun" crossorigin="anonymous" src="./assets/pintu_masuk_stadiun.jpg" />
+        <img id="entrance-lapangan" crossorigin="anonymous" src="./assets/entrance_lapangan.jpg" />
+        <img id="entrance-lapangan2" crossorigin="anonymous" src="./assets/entrance_lapangan2.jpg" />
         <img id="halaman-depan-stadion" crossorigin="anonymous" src="./assets/halaman_depan_stadion.jpg" />
+        <img id="jalan-didepan-stadion" crossorigin="anonymous" src="./assets/jalan_didepan_stadion.jpg" />
         <img id="halaman-depan-stadion-sisi-kanan1" crossorigin="anonymous" src="./assets/halaman_depan_stadion_sisi_kanan1.jpg" />
-        <img id="halaman-depan-stadion-sisi-kanan2" crossorigin="anonymous" src="./assets/halaman_depan_stadion_sisi_kanan2.jpg" />
         <img id="halaman-depan-stadion-sisi-kiri1" crossorigin="anonymous" src="./assets/halaman_depan_stadion_sisi_kiri1.jpg" />
         <img id="halaman-belakang-stadion1" crossorigin="anonymous" src="./assets/halaman_belakang_stadion1.jpg" />
-        <img id="halaman-belakang-stadion2" crossorigin="anonymous" src="./assets/halaman_belakang_stadion2.jpg" />
         <img id="gerbang-belakang" crossorigin="anonymous" src="./assets/gerbang_belakang.jpg" />
-        <img id="jalan-didepan-stadion" crossorigin="anonymous" src="./assets/jalan_didepan_stadion.jpg" />
-        <!-- Additional assets as needed -->
+        <img id="gerbang-sisi-kanan" crossorigin="anonymous" src="./assets/gerbang_sisi_kanan.jpg" />
+
+        <!-- Image link template -->
+        <script id="link" type="text/html">
+          <a-entity
+            class="link"
+            geometry="primitive: sphere; radius: 0.5; rotation: 90 0 90"
+            material="shader: flat; src: ${thumb}"
+            event-set__mouseenter="scale: 1.2 1.2 1"
+            event-set__mouseleave="scale: 1 1 1"
+            event-set__click="_target: #image-360; _delay: 300; material.src: ${src}"
+            proxy-event="event: click; to: #image-360; as: fade"
+            sound="on: click; src: #click-sound"
+          >
+          </a-entity>
+        </script>
       </a-assets>
 
-      <!-- Camera + cursor. -->
+      <!-- Camera + cursor -->
       <a-entity id="camera" camera look-controls>
         <a-cursor
           id="cursor"
@@ -44,8 +60,8 @@
           raycaster="objects: .link"
         ></a-cursor>
       </a-entity>
-      
-      <!-- 360-degree image. -->
+
+      <!-- 360-degree image -->
       <a-sky
         id="image-360"
         radius="10"
@@ -54,21 +70,32 @@
         animation__fadeback="property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade"
       ></a-sky>
 
-      <!-- Image links for the tour -->
-      <a-text value="Tengah Lapangan" position="0 -4 5" rotation="0 0 0"></a-text>
-      <a-entity id="links" layout="type: line; margin: 1.5" position="0 -3 5" rotation="-90 180 0">
+      <!-- Image links -->
+      <!-- Tengah Lapangan -->
+      <a-text value="Tengah Lapangan" position="-5 -4 0.5" rotation="0 90 0"></a-text>
+      <a-entity id="links" layout="type: line; margin: 1.5" position="-5 -3 1.5" rotation="-90 90 0">
+        <a-entity template="src: #link" data-src="#tengah-lapangan1" data-thumb="#tengah-lapangan1"></a-entity>
         <a-entity template="src: #link" data-src="#tengah-lapangan2" data-thumb="#tengah-lapangan2"></a-entity>
-        <a-entity template="src: #link" data-src="#pintu-masuk-stadiun" data-thumb="#pintu-masuk-stadiun"></a-entity>
-        <a-entity template="src: #link" data-src="#halaman-depan-stadion" data-thumb="#halaman-depan-stadion"></a-entity>
-        <a-entity template="src: #link" data-src="#halaman-depan-stadion-sisi-kanan1" data-thumb="#halaman-depan-stadion-sisi-kanan1"></a-entity>
       </a-entity>
 
-      <a-text value="Bagian Belakang" position="0 -4 -5" rotation="0 0 0"></a-text>
-      <a-entity id="links" layout="type: line; margin: 1.5" position="0 -3 -5" rotation="-90 180 0">
-        <a-entity template="src: #link" data-src="#halaman-belakang-stadion1" data-thumb="#halaman-belakang-stadion1"></a-entity>
-        <a-entity template="src: #link" data-src="#halaman-belakang-stadion2" data-thumb="#halaman-belakang-stadion2"></a-entity>
-        <a-entity template="src: #link" data-src="#gerbang-belakang" data-thumb="#gerbang-belakang"></a-entity>
+      <!-- Halaman Depan Stadion -->
+      <a-text value="Halaman Depan" position="0 -4 -5" rotation="0 0 0"></a-text>
+      <a-entity id="links" layout="type: line; margin: 1.5" position="0 -3 -5" rotation="-90 0 0">
+        <a-entity template="src: #link" data-src="#halaman-depan-stadion" data-thumb="#halaman-depan-stadion"></a-entity>
         <a-entity template="src: #link" data-src="#jalan-didepan-stadion" data-thumb="#jalan-didepan-stadion"></a-entity>
+      </a-entity>
+
+      <!-- Gerbang dan Halaman Belakang -->
+      <a-text value="Gerbang Belakang" position="5 -4 -0.5" rotation="0 -90 0"></a-text>
+      <a-entity id="links" layout="type: line; margin: 1.5" position="5 -3 -1.5" rotation="-90 -90 0">
+        <a-entity template="src: #link" data-src="#halaman-belakang-stadion1" data-thumb="#halaman-belakang-stadion1"></a-entity>
+        <a-entity template="src: #link" data-src="#gerbang-belakang" data-thumb="#gerbang-belakang"></a-entity>
+      </a-entity>
+
+      <!-- Gerbang Sisi Kanan -->
+      <a-text value="Gerbang Kanan" position="0 -4 5" rotation="0 180 0"></a-text>
+      <a-entity id="links" layout="type: line; margin: 1.5" position="0 -3 5" rotation="-90 180 0">
+        <a-entity template="src: #link" data-src="#gerbang-sisi-kanan" data-thumb="#gerbang-sisi-kanan"></a-entity>
       </a-entity>
     </a-scene>
   </body>
