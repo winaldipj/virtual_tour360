@@ -1,0 +1,23 @@
+{
+    "vrtour": {
+        "kode": "GAK",
+        "lokasi": "Gunung Anak Krakatau",
+        "deskripsi": "Deskripsi GAK",
+        "360imageurl": "",
+        "inset": [
+            {"title": "New", "imageurl": "./image/img01.jpg", "deskripsi": "", "position": "1 1 1", "rotation" : "0 45 0"},
+            {"title": "New", "imageurl": "./image/img02.jpg", "deskripsi": "", "position": "1 1 1", "rotation" : "0 45 0"},
+            {"title": "New", "imageurl": "./image/img03.jpg", "deskripsi": "", "position": "1 1 1", "rotation" : "0 45 0"}
+        ],
+        "label": [
+            {"title": "New", "position": "1 1 1", "rotation" : "0 45 0"},
+            {"title": "New", "position": "1 1 1", "rotation" : "0 45 0"},
+            {"title": "New", "position": "1 1 1", "rotation" : "0 45 0"}
+        ],
+        "nextlocation":[
+            {"kode": "New", "imageurl": "./image/img01.jpg", "position": "1 1 1", "rotation" : "0 45 0"},
+            {"kode": "New", "imageurl": "./image/img01.jpg", "position": "1 1 1", "rotation" : "0 45 0"},
+            {"kode": "New", "imageurl": "./image/img01.jpg", "position": "1 1 1", "rotation" : "0 45 0"}
+        ]
+    }
+}
