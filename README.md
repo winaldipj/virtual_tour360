@@ -9,6 +9,4 @@ Website ini merupakan website Virtual Reality Tour untuk Pahamon Stadium Bandar 
 4. Anda dapat mengarahkan kursor ke setiap titik tempat yang ingin anda kunjungi.
 
 # NOTE
-Virtual Tour ini merupakan salah satu uas mata Kuliah VR, yang dibuat oleh
-## Nama = Winaldi Putra Jaya
-## NPM  = 2115061010
+Virtual Tour ini merupakan salah satu uas mata Kuliah VR, yang dibuat oleh Winaldi Putra Jaya dengan NPM 2115061010
