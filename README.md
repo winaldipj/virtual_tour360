@@ -10,5 +10,5 @@ Website ini merupakan website Virtual Reality Tour untuk Pahamon Stadium Bandar 
 
 # NOTE
 Virtual Tour ini merupakan salah satu uas mata Kuliah VR, yang dibuat oleh
-Nama = Winaldi Putra Jaya
-NPM  = 2115061010
+## Nama = Winaldi Putra Jaya
+## NPM  = 2115061010
