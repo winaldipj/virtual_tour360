@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" />
+    <title>Stadium Virtual Tour</title>
+    <script src="./js/aframe/aframe.min.js"></script>
+    <script src="./js/aframe/aframe-event-set-component.min.js"></script>
+    <script src="./js/aframe/aframe-layout-component.min.js"></script>
+    <script src="./js/aframe/aframe-template-component.min.js"></script>
+    <script src="./js/aframe/aframe-proxy-event-component.min.js"></script>
+  </head>
+
+  <body>
+    <a-scene>
+      <a-assets>
+        <audio id="click-sound" crossorigin="anonymous" src="./audio/click.ogg"></audio>
+
+        <!-- Image Assets -->
+        <img id="tengah-lapangan1" crossorigin="anonymous" src="./assets/tengah_lapangan1.jpg" />
+        <img id="tengah-lapangan2" crossorigin="anonymous" src="./assets/tengah_lapangan2.jpg" />
+        <img id="entrance-lapangan" crossorigin="anonymous" src="./assets/entrance_lapangan.jpg" />
+        <img id="entrance-lapangan2" crossorigin="anonymous" src="./assets/entrance_lapangan2.jpg" />
+        <img id="halaman-depan-stadion" crossorigin="anonymous" src="./assets/halaman_depan_stadion.jpg" />
+        <img id="jalan-didepan-stadion" crossorigin="anonymous" src="./assets/jalan_didepan_stadion.jpg" />
+        <img id="halaman-depan-stadion-sisi-kanan1" crossorigin="anonymous" src="./assets/halaman_depan_stadion_sisi_kanan1.jpg" />
+        <img id="halaman-depan-stadion-sisi-kiri1" crossorigin="anonymous" src="./assets/halaman_depan_stadion_sisi_kiri1.jpg" />
+        <img id="halaman-belakang-stadion1" crossorigin="anonymous" src="./assets/halaman_belakang_stadion1.jpg" />
+        <img id="gerbang-belakang" crossorigin="anonymous" src="./assets/gerbang_belakang.jpg" />
+        <img id="gerbang-sisi-kanan" crossorigin="anonymous" src="./assets/gerbang_sisi_kanan.jpg" />
+
+        <!-- Image link template -->
+        <script id="link" type="text/html">
+          <a-entity
+            class="link"
+            geometry="primitive: sphere; radius: 0.5; rotation: 90 0 90"
+            material="shader: flat; src: ${thumb}"
+            event-set__mouseenter="scale: 1.2 1.2 1"
+            event-set__mouseleave="scale: 1 1 1"
+            event-set__click="_target: #image-360; _delay: 300; material.src: ${src}"
+            proxy-event="event: click; to: #image-360; as: fade"
+            sound="on: click; src: #click-sound"
+          >
+          </a-entity>
+        </script>
+      </a-assets>
+
+      <!-- Camera + cursor -->
+      <a-entity id="camera" camera look-controls>
+        <a-cursor
+          id="cursor"
+          position="0 0 -5"
+          geometry="primitive: ring; radiusInner: 0.05; radiusOuter: 0.1;"
+          material="color: black; shader: flat"
+          cursor="maxDistance: 30; fuse: true"
+          animation__click="property: scale; from: 0.5 0.5 0.5; to: 1 1 1;startEvents: click; dur: 150;easing:easeInQuad;"
+          animation__fusing="property: scale; from: 1 1 1; to: 0.5 0.5 0.5;startEvents: fusing; dur: 1000;easing:easeInQuad;"
+          event-set__mouseenter="_event: mouseenter; color: springgreen"
+          event-set__mouseleave="_event: mouseleave; color: black"
+          raycaster="objects: .link"
+        ></a-cursor>
+      </a-entity>
+
+      <!-- 360-degree image -->
+      <a-sky
+        id="image-360"
+        radius="10"
+        src="#tengah-lapangan1"
+        animation__fade="property: components.material.material.color; type: color; from: #FFF; to: #000; dur: 300; startEvents: fade"
+        animation__fadeback="property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade"
+      ></a-sky>
+
+      <!-- Image links -->
+      <!-- Tengah Lapangan -->
+      <a-text value="Tengah Lapangan" position="-5 -4 0.5" rotation="0 90 0"></a-text>
+      <a-entity id="links" layout="type: line; margin: 1.5" position="-5 -3 1.5" rotation="-90 90 0">
+        <a-entity template="src: #link" data-src="#tengah-lapangan1" data-thumb="#tengah-lapangan1"></a-entity>
+        <a-entity template="src: #link" data-src="#tengah-lapangan2" data-thumb="#tengah-lapangan2"></a-entity>
+      </a-entity>
+
+      <!-- Halaman Depan Stadion -->
+      <a-text value="Halaman Depan" position="0 -4 -5" rotation="0 0 0"></a-text>
+      <a-entity id="links" layout="type: line; margin: 1.5" position="0 -3 -5" rotation="-90 0 0">
+        <a-entity template="src: #link" data-src="#halaman-depan-stadion" data-thumb="#halaman-depan-stadion"></a-entity>
+        <a-entity template="src: #link" data-src="#jalan-didepan-stadion" data-thumb="#jalan-didepan-stadion"></a-entity>
+      </a-entity>
+
+      <!-- Gerbang dan Halaman Belakang -->
+      <a-text value="Gerbang Belakang" position="5 -4 -0.5" rotation="0 -90 0"></a-text>
+      <a-entity id="links" layout="type: line; margin: 1.5" position="5 -3 -1.5" rotation="-90 -90 0">
+        <a-entity template="src: #link" data-src="#halaman-belakang-stadion1" data-thumb="#halaman-belakang-stadion1"></a-entity>
+        <a-entity template="src: #link" data-src="#gerbang-belakang" data-thumb="#gerbang-belakang"></a-entity>
+      </a-entity>
+
+      <!-- Gerbang Sisi Kanan -->
+      <a-text value="Gerbang Kanan" position="0 -4 5" rotation="0 180 0"></a-text>
+      <a-entity id="links" layout="type: line; margin: 1.5" position="0 -3 5" rotation="-90 180 0">
+        <a-entity template="src: #link" data-src="#gerbang-sisi-kanan" data-thumb="#gerbang-sisi-kanan"></a-entity>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
